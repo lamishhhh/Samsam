@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special for Sam</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(to bottom right, #E6A8D7, #FFDDC1, #A8C3E6, #D3A8E6, #F5B7B1, #BDC3C7);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .hidden { display: none; }
+        .container { max-width: 500px; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+        button { padding: 10px; margin: 10px; font-size: 16px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container" id="startPage">
+        <h1>Special for Sam</h1>
+        <p>Enter the password</p>
+        <input type="text" id="passwordInput" placeholder="4-digit password" onkeypress="handleEnter(event)">
+        <p>HINT: The time that we start the relationship officially</p>
+        <button onclick="checkPassword()">Enter</button>
+    </div>
+
+    <div class="container hidden" id="question1">
+        <h2>Welcome to the exam with 4 questions.</h2>
+        <p>If you complete it successfully, a small reward awaits you at the end<3</p>
+        <button onclick="startQuiz(true)">I can't wait to start</button>
+        <button onclick="startQuiz(false)">My ass doesn't eat</button>
+    </div>
+
+    <div class="container hidden" id="error404">
+        <h1 style="color: blue;">404 Not Found</h1>
+        <button onclick="restart()">Try Again</button>
+    </div>
+
+    <div class="container hidden" id="question2">
+        <h2>Welcome to the first question.</h2>
+        <p>Would you love me if I were a worm? Just kidding ehehe.</p>
+        <p>What was the first movie we watched together?</p>
+        <button onclick="checkAnswer('A')">Mad Max</button>
+        <button onclick="fail()">Seriyye</button>
+        <button onclick="fail()">The Door</button>
+    </div>
+
+    <div class="container hidden" id="failPage">
+        <h1>You failed the first question damn it</h1>
+        <button onclick="restart()">Try Again</button>
+    </div>
+
+    <div class="container hidden" id="question3">
+        <h2>Good job my luv.</h2>
+        <p>Now tell me, what is my favorite feature about you?</p>
+        <form id="featuresForm">
+            <label><input type="checkbox" value="intelligence"> Intelligence</label><br>
+            <label><input type="checkbox" value="handsomeness"> Handsomeness</label><br>
+            <label><input type="checkbox" value="compassion"> Compassion</label><br>
+            <label><input type="checkbox" value="love"> Love</label><br>
+            <label><input type="checkbox" value="loyalty"> Loyalty</label><br>
+            <label><input type="checkbox" value="funny"> Funny</label><br>
+            <label><input type="checkbox" value="culture"> Culture</label><br>
+            <label><input type="checkbox" value="libido"> Libido</label><br>
+            <label><input type="checkbox" value="tasteful"> Tasteful</label><br>
+            <label><input type="checkbox" value="smelling nice"> Smelling Nice</label><br>
+            <label><input type="checkbox" value="skillful"> Skillful</label><br>
+            <label><input type="checkbox" value="respectful"> Respectful</label><br>
+            <label><input type="checkbox" value="brave"> Brave</label><br>
+            <label><input type="checkbox" value="strong"> Strong</label><br>
+            <button type="button" onclick="checkFeatures()">Enter</button>
+        </form>
+    </div>
+
+    <div class="container hidden" id="question4">
+        <h2>You r perfect.</h2>
+        <p>You will determine the correct answer to the next question, these are the things I am curious about.</p>
+        <p>At what moments do you feel the deepest love for me?</p>
+        <p style="color: red;">You don't have to write this question, you can answer it by looking into my eyes.</p>
+        <button onclick="nextQuestion()">Completed</button>
+    </div>
+
+    <div class="container hidden" id="question5">
+        <h2>We came to the last question.</h2>
+        <p>Will I be the leading role in your story forever?</p>
+        <button onclick="finish()">Yes</button>
+        <button onclick="finish()">Definitely</button>
+        <button onclick="finish()">If my answer is "no" then I'm an idiot</button>
+    </div>
+
+    <div class="container hidden" id="finalPage">
+        <h1>Quiz successful.</h1>
+        <p>Now kiss me and take ur prize</p>
+    </div>
+
+    <script>
+        function checkPassword() {
+            const password = document.getElementById("passwordInput").value;
+            if (password === "1405") {
+                document.getElementById("startPage").classList.add("hidden");
+                document.getElementById("question1").classList.remove("hidden");
+            }
+        }
+
+        function handleEnter(event) {
+            if (event.key === "Enter") {
+                checkPassword();
+            }
+        }
+
+        function startQuiz(correct) {
+            document.getElementById("question1").classList.add("hidden");
+            if (correct) {
+                document.getElementById("question2").classList.remove("hidden");
+            } else {
+                document.getElementById("error404").classList.remove("hidden");
+            }
+        }
+
+        function checkAnswer(answer) {
+            if (answer === "A") {
+                document.getElementById("question2").classList.add("hidden");
+                document.getElementById("question3").classList.remove("hidden");
+            }
+        }
+
+        function fail() {
+            document.getElementById("question2").classList.add("hidden");
+            document.getElementById("failPage").classList.remove("hidden");
+        }
+
+        function checkFeatures() {
+            document.getElementById("question3").classList.add("hidden");
+            document.getElementById("question4").classList.remove("hidden");
+        }
+
+        function nextQuestion() {
+            document.getElementById("question4").classList.add("hidden");
+            document.getElementById("question5").classList.remove("hidden");
+        }
+
+        function finish() {
+            document.getElementById("question5").classList.add("hidden");
+            document.getElementById("finalPage").classList.remove("hidden");
+        }
+
+        function restart() {
+            location.reload();
+        }
+    </script>
+</body>
+</html>
